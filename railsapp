@@ -39,7 +39,7 @@ templates = %w[auth base]
   end
  
  sh = "rails #{options[:appname]}"
- sh = sh + " -m http://github.com/steveweet/rails_templates/blob/master/#{template}_template.rb" unless template.nil?
+ sh = sh + " -m http://github.com/steveweet/rails_templates/raw/master/#{template}_template.rb" unless template.nil?
  
  exec sh
 
