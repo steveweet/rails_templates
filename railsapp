@@ -1,0 +1,47 @@
+#!/usr/bin/ruby -wKU
+
+# == Synopsis
+#
+# Initialises a new rails app using an optional template
+#
+# == Author
+# Steve Weet
+#
+
+require 'optparse'
+
+
+templates = %w[auth base] 
+
+ options = {}
+ 
+ optparse = OptionParser.new do|opts|
+
+   opts.on( '-h', '--help', 'Display this screen' ) do
+     puts opts
+     exit
+   end
+    opts.on( '-t', '--template [NAME]', "The name of the template to use. Possible values are #{templates.join(',')}. Default is base" ) do|f|
+      options[:template] = f
+    end
+    opts.on( '-a', '--application NAME', "The application name" ) do|f|
+      options[:appname] = f
+    end
+ end
+
+  optparse.parse!
+  if options.has_key?(:template)
+    options[:template] = "base" if options[:template].nil?
+    template = options[:template]
+    raise OptionParser::InvalidOption, "Invalid template name #{template}" unless templates.include? template
+  else
+    template = nil
+  end
+ 
+ sh = "rails #{options[:appname]}"
+ sh = sh + " -m http://github.com/steveweet/rails_templates/blob/master/#{template}_template.rb" unless template.nil?
+ 
+ exec sh
+
+ 
+

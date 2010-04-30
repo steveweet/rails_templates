@@ -1,5 +1,5 @@
 # auth_template.rb
-load_template "/Users/rbates/code/base_template.rb"
+load_template "http://github.com/steveweet/rails_templates/raw/master/base_template.rb"
 
 name = ask("What do you want a user to be called?")
 generate :nifty_authentication, name
